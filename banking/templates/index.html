@@ -1,0 +1,134 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="stylesheet" href="{% static 'style.css' %}" />
+    <title>Banking App</title>
+  </head>
+
+  <body>
+    <!-- Header -->
+    <section id="header">
+      <div class="header container">
+        <div class="nav-bar">
+          <div class="brand">
+            <a href="#hero">
+              <h1><span>G</span>rip</h1>
+            </a>
+          </div>
+          <div class="nav-list">
+            <div class="hamburger">
+              <div class="bar"></div>
+            </div>
+            <ul>
+              <li><a href="#hero" data-after="Home">Home</a></li>
+              <li><a href="#services" data-after="Service">Accounts</a></li>
+              <li><a href="#projects" data-after="Projects">Transfer</a></li>
+              <!-- <li><a href="#about" data-after="About">About</a></li>
+            <li><a href="#contact" data-after="Contact">Contact</a></li> -->
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- End Header -->
+
+    <!-- Hero Section  -->
+    <section id="hero">
+      <div class="hero container">
+        <div>
+          <h1>Small steps, <span></span></h1>
+          <h1>to a better <span></span></h1>
+          <h1>Future <span></span></h1>
+          <a href="#projects" type="button" class="cta">Let's Begin</a>
+        </div>
+      </div>
+    </section>
+    <!-- End Hero Section  -->
+    <!-- Service Section -->
+    <section id="services">
+      <div class="services container">
+        <div class="service-top">
+          <h1 class="section-title">Acc<span>o</span>unts</h1>
+          <p>Your money is safe with us</p>
+        </div>
+        <div class="service-bottom">
+          {% for detail in details %}
+          <div class="service-item">
+            <!-- <div class="icon"><img src="https://img.icons8.com/bubbles/100/000000/services.png" /></div> -->
+            <h2>{{ detail.name }}</h2>
+            <p>A/C: {{ detail.account_no }}</p>
+            <p>&#128; {{ detail.balance }}</p>
+          </div>
+          {% endfor %}
+        </div>
+      </div>
+    </section>
+    <!-- End Service Section -->
+    <section id="projects">
+      <form action="{% url 'home' %}" method="POST">
+        <!-- {% csrf_token %} -->
+        <select name="sender" placeholder="sender">
+          <option value="none" selected>
+            --Select Senders Account---
+          </option>
+          {% for detail in details %}
+          <option>{{detail.name}}</option>
+          {% endfor %}
+        </select>
+        <button type="submit" value="Transfer">Transfer</button>
+        <select name="reciever" placeholder="reciever">
+          <option value="none" selected>
+            --Select Receivers Account--
+          </option>
+          {% for detail in details %}
+          <option>{{detail.name}}</option>
+          {% endfor %}
+        </select>
+        <div className="amount">
+          <input name="amount" type="number" placeholder="Enter Amount" />
+        </div>
+      </form>
+    </section>
+
+
+    <!-- Footer -->
+    <section id="footer">
+      <div class="footer container">
+        <div class="brand">
+          <h1><span>S</span>hriyansh <span>V</span>ishwakarma</h1>
+        </div>
+        <!-- <h2>Your Complete Web Solution</h2> -->
+        <div class="social-icon">
+          <div class="social-item">
+            <a href="#"
+              ><img
+                src="https://img.icons8.com/bubbles/100/000000/facebook-new.png"
+            /></a>
+          </div>
+          <div class="social-item">
+            <a href="#"
+              ><img
+                src="https://img.icons8.com/bubbles/100/000000/instagram-new.png"
+            /></a>
+          </div>
+          <div class="social-item">
+            <a href="#"
+              ><img src="https://img.icons8.com/bubbles/100/000000/twitter.png"
+            /></a>
+          </div>
+          <div class="social-item">
+            <a href="#"
+              ><img src="https://img.icons8.com/bubbles/100/000000/behance.png"
+            /></a>
+          </div>
+        </div>
+        <p>Copyright © 2020 Shriyansh Vishwakarma. All rights reserved</p>
+      </div>
+    </section>
+    <!-- End Footer -->
+    <script src="{% static 'app.js' %}"></script>
+  </body>
+</html>
